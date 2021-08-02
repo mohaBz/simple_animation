@@ -22,16 +22,16 @@ class _MyHomePageState extends State<MyHomePage>
     _sizeAnimation = Tween<Size>(begin: Size(100, 50), end: Size(400, 200))
         .animate(CurvedAnimation(
             parent: _animationController, curve: Curves.linear));
-    _sizeAnimation.addListener(() => setState(() {}));
+    // this is used when manually managing the animation
+    // _sizeAnimation.addListener(() => setState(() {}));
     super.initState();
   }
 
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  @override
+  void dispose() {
+    // this is used when manually managing the animation
+    // _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -47,30 +47,52 @@ class _MyHomePageState extends State<MyHomePage>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             GestureDetector(
+              // onTapDown: (_) {
+              //   _animationController.forward();
+              // },
+              // onTapUp: (_) {
+              //   _animationController.reverse();
+              // },
+              child: Container(
+                padding: EdgeInsets.all(10),
+                alignment: Alignment.center,
+                child: Text('Manualy managed Animation'),
+                height: 50, //_sizeAnimation.value.height,
+                width: 100, //_sizeAnimation.value.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.blueGrey),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            GestureDetector(
               onTapDown: (_) {
                 _animationController.forward();
               },
               onTapUp: (_) {
                 _animationController.reverse();
               },
-              child: Container(
-                padding: EdgeInsets.all(10),
-                alignment: Alignment.center,
-                child: Text('Manualy managed Animation'),
-                height: _sizeAnimation.value.height,
-                width: _sizeAnimation.value.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.blueGrey),
+              child: AnimatedBuilder(
+                animation: _animationController,
+                builder: (ctx, text) {
+                  return Container(
+                    padding: EdgeInsets.all(10),
+                    alignment: Alignment.center,
+                    child: text,
+                    height: _sizeAnimation.value.height,
+                    width: _sizeAnimation.value.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.blueGrey),
+                  );
+                },
+                child: Text('AnimatedBuilder'),
               ),
-            )
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
