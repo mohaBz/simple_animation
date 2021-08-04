@@ -1,10 +1,34 @@
 import 'package:flutter/material.dart';
 
-class AnimatedBuilderCard extends StatelessWidget {
-  final AnimationController _animationController;
-  final Animation<Size> _sizeAnimation;
+class AnimatedBuilderCard extends StatefulWidget {
+  const AnimatedBuilderCard();
 
-  const AnimatedBuilderCard(this._animationController, this._sizeAnimation);
+  @override
+  _AnimatedBuilderCardState createState() => _AnimatedBuilderCardState();
+}
+
+class _AnimatedBuilderCardState extends State<AnimatedBuilderCard>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<Size> _sizeAnimation;
+  @override
+  void initState() {
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 300),
+    );
+    _sizeAnimation = Tween<Size>(begin: Size(100, 50), end: Size(400, 200))
+        .animate(CurvedAnimation(
+            parent: _animationController, curve: Curves.linear));
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
