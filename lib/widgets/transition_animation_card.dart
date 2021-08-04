@@ -9,14 +9,14 @@ class TransitionAnimationCard extends StatefulWidget {
 class _TransitionAnimationCardState extends State<TransitionAnimationCard>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
-  late Animation<double> _sizeAnimation;
+  late Animation<double> _opacityAnimation;
   @override
   void initState() {
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 300),
     );
-    _sizeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+    _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
         CurvedAnimation(parent: _animationController, curve: Curves.linear));
 
     super.initState();
@@ -32,7 +32,7 @@ class _TransitionAnimationCardState extends State<TransitionAnimationCard>
   @override
   Widget build(BuildContext context) {
     return FadeTransition(
-      opacity: _sizeAnimation,
+      opacity: _opacityAnimation,
       child: GestureDetector(
         onTapDown: (_) {
           _animationController.forward();
