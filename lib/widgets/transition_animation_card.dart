@@ -23,6 +23,13 @@ class _TransitionAnimationCardState extends State<TransitionAnimationCard>
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FadeTransition(
       opacity: _sizeAnimation,
