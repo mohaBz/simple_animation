@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simple_animation/widgets/animated_builder_card.dart';
 import 'package:simple_animation/widgets/animated_container_card.dart';
 import 'package:simple_animation/widgets/manually_managed_card.dart';
+import 'package:simple_animation/widgets/transition_animation_card.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -43,19 +44,25 @@ class _MyHomePageState extends State<MyHomePage>
       body: Container(
         width: double.infinity,
         padding: EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            ManuallyManagedCard(),
-            SizedBox(
-              height: 20,
-            ),
-            AnimatedBuilderCard(_animationController, _sizeAnimation),
-            SizedBox(
-              height: 20,
-            ),
-            AnimatedContainerCard()
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              ManuallyManagedCard(),
+              SizedBox(
+                height: 20,
+              ),
+              AnimatedBuilderCard(_animationController, _sizeAnimation),
+              SizedBox(
+                height: 20,
+              ),
+              AnimatedContainerCard(),
+              SizedBox(
+                height: 20,
+              ),
+              TransitionAnimationCard()
+            ],
+          ),
         ),
       ),
     );

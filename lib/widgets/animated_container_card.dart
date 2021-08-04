@@ -38,7 +38,7 @@ class _AnimatedContainerCardState extends State<AnimatedContainerCard> {
         width: _expanded ? 400 : 100,
         padding: EdgeInsets.all(10),
         alignment: Alignment.center,
-        child: Text('Manualy managed Animation'),
+        child: Text('AnimatedContainer Animation'),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: _expanded ? Colors.green : Colors.redAccent,
